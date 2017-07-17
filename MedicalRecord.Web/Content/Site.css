@@ -1,0 +1,63 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+label{
+    margin:5px;
+}
+
+.diseases-container{
+    border:1px solid black;
+    min-height:20px;
+}
+
+.teeth-status-table td.tooth-cell{
+    border:1px solid black;
+    font-size:1.3em;
+    height:1.6em;
+    width:1.5em;
+    text-align:center;
+    vertical-align:central;
+    padding:3px;
+}
+
+.teeth-status-table td.disabled {
+    //opacity:0.7;
+    //color:darkgray;
+    background-color:red;
+}
+
+.teeth-status-table td.enabled {
+    //opacity:0.7;
+    //color:darkgray;
+    background-color: greenyellow;
+}
+
+.diseases-container .disease-entity{
+    display:inline-block;
+}
+
+#new-disease{
+    float:right;
+}

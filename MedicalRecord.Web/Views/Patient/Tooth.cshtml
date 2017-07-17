@@ -1,0 +1,12 @@
+﻿@using MedicalRecord.Web.DataPersisters
+
+@{
+    ToothPersister toothDataLoader = new ToothPersister();
+    var dropdownValues = toothDataLoader.GetToothStates();
+}
+<select>
+    @for (int i = 0; i < dropdownValues.Count; i++)
+    {
+        <option value="@dropdownValues[i].Code">@dropdownValues[i].Code</option>
+    }
+</select>

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalRecord.Web", "MedicalRecord.Web\MedicalRecord.Web.csproj", "{F76251BF-E30C-4EE1-8D18-94301427BC38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalRecord.Data", "MedicalRecord.Data\MedicalRecord.Data.csproj", "{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Registration|Any CPU = Registration|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Registration|Any CPU.ActiveCfg = Registration|Any CPU
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Registration|Any CPU.Build.0 = Registration|Any CPU
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F76251BF-E30C-4EE1-8D18-94301427BC38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Registration|Any CPU.ActiveCfg = Registration|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Registration|Any CPU.Build.0 = Registration|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EAA092E-9A5D-4C57-895F-38FD2AE01D65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

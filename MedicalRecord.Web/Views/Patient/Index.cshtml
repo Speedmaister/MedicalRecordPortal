@@ -1,0 +1,27 @@
+﻿@model MedicalRecord.Web.Models.PatientModel
+@{
+    var isNew = (Model.Id == 0);
+    if (isNew)
+    {
+        ViewBag.Title = "New Patient";
+    }
+    else
+    {
+        ViewBag.Title = Model.FullName;
+    }
+}
+
+<div>
+    @if (isNew)
+    {
+        Html.RenderPartial("NewPatient", Model);
+    }
+    else
+    {
+        Html.Partial("EditPatient", Model);
+    }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Patient/Patient.js"></script>
+}

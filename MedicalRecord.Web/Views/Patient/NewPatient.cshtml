@@ -1,0 +1,114 @@
+﻿@using MedicalRecord.Web.Helpers;
+@using MedicalRecord.Web.Models;
+@model PatientModel
+@{
+    var tableCellHtmlAttributes = new Dictionary<string, object>();
+    tableCellHtmlAttributes["class"] = "tooth-cell";
+}
+<div>
+    <div>
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+
+        @Html.LabelFor(m => m.SurName)
+        @Html.TextBoxFor(m => m.SurName)
+
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "asd" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.EGN)
+        @Html.TextBoxFor(m => m.EGN)
+
+        @Html.LabelFor(m => m.Telephone)
+        @Html.TextBoxFor(m => m.Telephone)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Address)
+        @Html.TextAreaFor(m => m.Address)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Diseases)
+        <div class="diseases-container">
+            @foreach (var disease in Model.Diseases)
+            {
+                @Html.Partial("Disease", disease);
+            }
+
+            <div>
+                <div id="new-disease" >
+                    <input type="text" value="Enter new disease" />
+                    <button>Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.TeethStatus)
+        <table class="teeth-status-table">
+            <tr>
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fifth], Quadrants.Fifth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Sixth], Quadrants.Sixth, tableCellHtmlAttributes)
+            </tr>
+            <tr>
+                @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.First, Quadrants.Fifth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Second, Quadrants.Sixth, tableCellHtmlAttributes)
+            </tr>
+            <tr>
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.First], Quadrants.First, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Second], Quadrants.Second, tableCellHtmlAttributes)
+            </tr>
+            <tr>
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fourth], Quadrants.Fourth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Third], Quadrants.Third, tableCellHtmlAttributes)
+            </tr>
+            <tr>
+                @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Fourth, Quadrants.Eighth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Third, Quadrants.Seventh, tableCellHtmlAttributes)
+            </tr>
+            <tr>
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Eighth], Quadrants.Eighth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Seventh], Quadrants.Seventh, tableCellHtmlAttributes)
+            </tr>
+        </table>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Procedures)
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Диагноза</th>
+                    <th>Зъб</th>
+                    <th>Процедура</th>
+                    <th>Цена</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var procedure in Model.Procedures)
+                {
+                    <tr>
+                        <td>@procedure.Date</td>
+                        <td>@procedure.Diagnose</td>
+                        <td>@procedure.ToothId</td>
+                        <td>@procedure.Name</td>
+                        <td>@procedure.Price</td>
+                        <td>
+                            <button>Delete</button>
+                            <input type="hidden" value="@procedure.Id" />
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td><input type="date" id="procedure-date" /></td>
+                    <td><input type="text" id="procedure-diagnose" /></td>
+                    <td><select type="text" id="procedure-toothid" /></td>
+                    <td><input type="text" id="procedure-name" /></td>
+                    <td><input type="text" id="procedure-price" /></td>
+                    <td><button id="add-procedure">Add</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
