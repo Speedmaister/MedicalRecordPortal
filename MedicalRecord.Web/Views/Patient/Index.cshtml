@@ -18,10 +18,12 @@
     }
     else
     {
+        @Html.HiddenFor(m => m.Id, new { id = "patient-id" });
         Html.Partial("EditPatient", Model);
     }
 </div>
 
 @section Scripts {
     <script src="~/Scripts/Patient/Patient.js"></script>
+    <script src="~/Scripts/Patient/Tooth.js"></script>
 }

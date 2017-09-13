@@ -151,5 +151,32 @@ namespace MedicalRecord.Web.Models
                 }
             }
         }
+
+        public Patient ToPatient()
+        {
+            Patient patient = new Patient()
+            {
+                Id = this.Id,
+                FirstName = this.FirstName,
+                SurName = this.SurName,
+                LastName = this.LastName,
+                EGN = this.EGN,
+                Telephone = this.Telephone,
+                Address = this.Address,
+                Diseases = this.Diseases.Select(x => new Disease() { Id = x.Id, Name = x.Name }).ToList()
+            };
+
+            foreach (var quadrant in TeethStatus)
+            {
+                foreach(var toothModel in quadrant.Value)
+                {
+                    var tooth = new Tooth();
+                    tooth.Type = toothModel.Type;
+                    tooth.OrderNumber = toothModel.OrderNumber;
+                    tooth.Quadrant = (byte)toothModel.Quadrant;
+                    tooth.StateCode = toothModel.StateCode;
+                }
+            }
+        }
     }
 }

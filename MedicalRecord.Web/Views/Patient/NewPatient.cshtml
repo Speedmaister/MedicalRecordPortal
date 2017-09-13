@@ -4,6 +4,10 @@
 @{
     var tableCellHtmlAttributes = new Dictionary<string, object>();
     tableCellHtmlAttributes["class"] = "tooth-cell";
+
+    var toothNumberCellHtmlAttributes = new Dictionary<string, object>();
+    toothNumberCellHtmlAttributes["class"] = "tooth-cell tooth-number";
+
 }
 <div>
     <div>
@@ -47,28 +51,28 @@
         @Html.LabelFor(m => m.TeethStatus)
         <table class="teeth-status-table">
             <tr>
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fifth], Quadrants.Fifth, tableCellHtmlAttributes)
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Sixth], Quadrants.Sixth, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fifth], Quadrants.Fifth, toothNumberCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Sixth], Quadrants.Sixth, toothNumberCellHtmlAttributes)
             </tr>
             <tr>
                 @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.First, Quadrants.Fifth, tableCellHtmlAttributes)
                 @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Second, Quadrants.Sixth, tableCellHtmlAttributes)
             </tr>
             <tr>
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.First], Quadrants.First, tableCellHtmlAttributes)
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Second], Quadrants.Second, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.First], Quadrants.First, toothNumberCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Second], Quadrants.Second, toothNumberCellHtmlAttributes)
             </tr>
             <tr>
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fourth], Quadrants.Fourth, tableCellHtmlAttributes)
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Third], Quadrants.Third, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Fourth], Quadrants.Fourth, toothNumberCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Third], Quadrants.Third, toothNumberCellHtmlAttributes)
             </tr>
             <tr>
                 @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Fourth, Quadrants.Eighth, tableCellHtmlAttributes)
                 @Html.DrawQuadrantStatusesRow(Model.TeethStatus, Quadrants.Third, Quadrants.Seventh, tableCellHtmlAttributes)
             </tr>
             <tr>
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Eighth], Quadrants.Eighth, tableCellHtmlAttributes)
-                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Seventh], Quadrants.Seventh, tableCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Eighth], Quadrants.Eighth, toothNumberCellHtmlAttributes)
+                @Html.DrawQuadrantRowWithNumbers(Model.TeethStatus[Quadrants.Seventh], Quadrants.Seventh, toothNumberCellHtmlAttributes)
             </tr>
         </table>
     </div>
@@ -110,5 +114,8 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+        <button id="save-patient">Save Patient</button>
     </div>
 </div>
