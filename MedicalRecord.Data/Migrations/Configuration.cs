@@ -39,7 +39,7 @@
                 new ToothState() { Code = "X", Name = "Изкуствен" },
                 new ToothState() { Code = "Pa", Name = "Парадонтит" },
                 new ToothState() { Code = "F", Name = "Фрактура" },
-                new ToothState() { Code = " ", Name = "None" });
+                new ToothState() { Code = "N", Name = "None" });
         }
     }
 }

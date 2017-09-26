@@ -24,5 +24,10 @@ namespace MedicalRecord.Data
         public int ToothId { get; set; }
 
         public virtual Tooth Tooth { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id:{Id} Name:{Name} ToothId:{ToothId}";
+        }
     }
 }

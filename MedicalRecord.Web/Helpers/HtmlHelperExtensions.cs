@@ -17,9 +17,9 @@ namespace MedicalRecord.Web.Helpers
             return new HtmlString(drawer.DrawNumbersRow(teeth, quadrant, htmlAttributes));
         }
 
-        public static HtmlString DrawQuadrantStatusesRow(this HtmlHelper helper, Dictionary<Quadrants, ToothModel[]> teehStatus, Quadrants longQuadrant, Quadrants shortQuadrant, IDictionary<string, object> htmlAttributes = null)
+        public static HtmlString DrawQuadrantStatusesRow(this HtmlHelper helper, Dictionary<Quadrants, ToothModel[]> teethStatus, Quadrants longQuadrant, Quadrants shortQuadrant, IDictionary<string, object> htmlAttributes = null)
         {
-            return new HtmlString(drawer.DrawStatusesRow(teehStatus, longQuadrant, shortQuadrant, htmlAttributes));
+            return new HtmlString(drawer.DrawStatusesRow(teethStatus, longQuadrant, shortQuadrant, htmlAttributes));
         }
     }
 }

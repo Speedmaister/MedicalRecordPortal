@@ -78,7 +78,7 @@
     </div>
     <div>
         @Html.LabelFor(m => m.Procedures)
-        <table>
+        <table id="medical-procedures-table">
             <thead>
                 <tr>
                     <th>Дата</th>
@@ -90,12 +90,20 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td><input type="date" id="procedure-date" /></td>
+                    <td><input type="text" id="procedure-diagnose" /></td>
+                    <td><select type="text" id="procedure-toothnumber" /></td>
+                    <td><input type="text" id="procedure-name" /></td>
+                    <td><input type="text" id="procedure-price" /></td>
+                    <td><button id="add-procedure">Add</button></td>
+                </tr>
                 @foreach (var procedure in Model.Procedures)
                 {
                     <tr>
                         <td>@procedure.Date</td>
                         <td>@procedure.Diagnose</td>
-                        <td>@procedure.ToothId</td>
+                        <td>@procedure.ToothNumber</td>
                         <td>@procedure.Name</td>
                         <td>@procedure.Price</td>
                         <td>
@@ -104,18 +112,10 @@
                         </td>
                     </tr>
                 }
-                <tr>
-                    <td><input type="date" id="procedure-date" /></td>
-                    <td><input type="text" id="procedure-diagnose" /></td>
-                    <td><select type="text" id="procedure-toothid" /></td>
-                    <td><input type="text" id="procedure-name" /></td>
-                    <td><input type="text" id="procedure-price" /></td>
-                    <td><button id="add-procedure">Add</button></td>
-                </tr>
             </tbody>
         </table>
     </div>
     <div>
-        <button id="save-patient">Save Patient</button>
+        <button id="create-patient">Create Patient</button>
     </div>
 </div>

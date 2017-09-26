@@ -22,7 +22,7 @@ namespace MedicalRecord.Web.Models
             Quadrant = quadrant;
             Type = type;
             OrderNumber = orderNumber;
-            StateCode = "";
+            StateCode = "N";
         }
 
         public int Id { get; set; }
@@ -37,5 +37,13 @@ namespace MedicalRecord.Web.Models
 
         [Required]
         public string StateCode { get; set; }
+
+        public int Number
+        {
+            get
+            {
+                return (int)Quadrant * 10 + OrderNumber;
+            }
+        }
     }
 }

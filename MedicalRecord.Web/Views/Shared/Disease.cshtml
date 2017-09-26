@@ -1,5 +1,5 @@
-﻿@model System.String
-<div class="disease-entity">
-    <span>@Model</span>
+﻿@model MedicalRecord.Web.Models.DiseaseModel
+<div class="disease-entity" data-id="@Model.Id">
+    <span>@Model.Name</span>
     <img src="~/Content/Images/closeSign.png" alt="remove" />
 </div>

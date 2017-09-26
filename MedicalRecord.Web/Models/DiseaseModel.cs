@@ -5,6 +5,8 @@ namespace MedicalRecord.Web.Models
 {
     public class DiseaseModel
     {
+        public DiseaseModel() { }
+
         public DiseaseModel(Disease diseaseEntity)
         {
             Id = diseaseEntity.Id;

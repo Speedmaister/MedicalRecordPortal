@@ -146,7 +146,7 @@ namespace MedicalRecord.Web.Models
                     quadrantOfTeeth[j] = new ToothModel(tooth);
                     for (int k = 0; k < tooth.Procedures.Count; k++)
                     {
-                        Procedures.Add(new MedicalProcedureModel(tooth.Procedures[j], tooth.Id));
+                        Procedures.Add(new MedicalProcedureModel(tooth.Procedures[j]));
                     }
                 }
             }
@@ -171,12 +171,33 @@ namespace MedicalRecord.Web.Models
                 foreach(var toothModel in quadrant.Value)
                 {
                     var tooth = new Tooth();
+                    tooth.Id = toothModel.Id;
                     tooth.Type = toothModel.Type;
                     tooth.OrderNumber = toothModel.OrderNumber;
                     tooth.Quadrant = (byte)toothModel.Quadrant;
                     tooth.StateCode = toothModel.StateCode;
+                    tooth.IsActive = toothModel.IsActive;
+                    tooth.Procedures = new List<MedicalProcedure>();
+
+                    foreach (var procedureModel in Procedures.Where(x => x.ToothNumber == toothModel.Number))
+                    {
+                        MedicalProcedure procedure = new MedicalProcedure();
+                        procedure.Id = procedureModel.Id;
+                        procedure.Name = procedureModel.Name;
+                        procedure.Price = procedureModel.Price;
+                        procedure.ToothId = toothModel.Id;
+                        procedure.Notes = procedureModel.Notes;
+                        procedure.Diagnose = procedureModel.Diagnose;
+                        procedure.Date = procedureModel.Date;
+
+                        tooth.Procedures.Add(procedure);
+                    }
+
+                    patient.TeethStatus.Add(tooth);
                 }
             }
+
+            return patient;
         }
     }
 }

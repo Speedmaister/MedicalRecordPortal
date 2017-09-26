@@ -22,21 +22,21 @@
         var dropdownTemplate;
         $.ajax({
             method: "GET",
-            url: "Patient/Tooth",
+            url: "Tooth",
             success: function (htmlTemplate) {
                 dropdownTemplate = htmlTemplate;
                 for (var i = 0; i < toothStateCells.length; i++) {
                     var cell = $(toothStateCells[i]);
                     var value = cell.text();
                     cell.html(dropdownTemplate);
-                    cell.val(value);
+                    $(cell.children('select')).val(value);
                 }
             }
         })
 
-        var toothIdInput = $('#procedure-toothid');
+        var toothNumberInput = $('#procedure-toothnumber');
         $.each(toothNumbers, function (i, item) {
-            toothIdInput.append($('<option>', {
+            toothNumberInput.append($('<option>', {
                 value: item,
                 text: item
             }))

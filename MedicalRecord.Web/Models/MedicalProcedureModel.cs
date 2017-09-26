@@ -8,7 +8,7 @@ namespace MedicalRecord.Web.Models
     {
         public MedicalProcedureModel() { }
 
-        public MedicalProcedureModel(MedicalProcedure procedureEntity, int toothId)
+        public MedicalProcedureModel(MedicalProcedure procedureEntity)
         {
             Id = procedureEntity.Id;
             Date = procedureEntity.Date;
@@ -16,7 +16,8 @@ namespace MedicalRecord.Web.Models
             Name = procedureEntity.Name;
             Price = procedureEntity.Price;
             Notes = procedureEntity.Notes;
-            ToothId = toothId;
+            ToothId = procedureEntity.Tooth.Id;
+            ToothNumber = procedureEntity.Tooth.Quadrant * 10 + procedureEntity.Tooth.OrderNumber;
         }
 
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace MedicalRecord.Web.Models
         public string Notes { get; set; }
 
         public int ToothId { get; set; }
+
+        public int ToothNumber { get; set; }
     }
 }

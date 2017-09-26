@@ -34,5 +34,10 @@ namespace MedicalRecord.Data
         public virtual Patient Patient { get; set; }
 
         public virtual List<MedicalProcedure> Procedures { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id:{Id} Quadrant:{(int)Quadrant} OrderNumber:{OrderNumber} IsActive:{IsActive} State:{State}";
+        }
     }
 }

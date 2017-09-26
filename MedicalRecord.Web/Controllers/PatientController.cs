@@ -14,13 +14,15 @@ namespace MedicalRecord.Web.Controllers
     public class PatientController : Controller
     {
         // GET: Patient
+        [HttpGet]
         public ActionResult Index()
         {
             return View(new PatientModel());
         }
 
         // GET: Patient
-        public ActionResult Index(int id)
+        [HttpGet]
+        public ActionResult GetById(int id)
         {
             PatientPersister patientPersister = new PatientPersister();
             var patient = patientPersister.Get(id);
@@ -28,17 +30,18 @@ namespace MedicalRecord.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(PatientModel patient)
+        public ActionResult Index(string patientJson)
         {
+            PatientModel patient = JsonConvert.DeserializeObject<PatientModel>(patientJson);
             PatientPersister patientPersister = new PatientPersister();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    int id = patientPersister.Save(patient);
-                    return RedirectToAction(nameof(Index), new { id = id });
+                    int id = patientPersister.CreatePatient(patient);
+                    return RedirectToAction(nameof(GetById), new { id = id });
                 }
-                
+
                 ModelState.AddModelError("InvalidData", "Намерени са невалидни полета.");
             }
             catch(Exception ex)
@@ -54,17 +57,26 @@ namespace MedicalRecord.Web.Controllers
             return PartialView();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Disease(string newDisease)
         {
-
-            return PartialView();
+            var disease = new DiseaseModel() { Name = newDisease };
+            return PartialView(disease);
         }
 
-        public ActionResult RemoveDisease(string disease, int patientId)
+        [HttpPost]
+        public ActionResult Disease(string newDisease, int patientId)
         {
             DiseasePersister diseasePersister = new DiseasePersister();
-            diseasePersister.RemoveDisease(disease, patientId);
+            var disease = diseasePersister.AddDisease(newDisease, patientId);
+            return PartialView(disease);
+        }
+        
+        [HttpPost]
+        public ActionResult RemoveDisease(int diseaseId, int patientId)
+        {
+            DiseasePersister diseasePersister = new DiseasePersister();
+            diseasePersister.RemoveDisease(diseaseId, patientId);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
