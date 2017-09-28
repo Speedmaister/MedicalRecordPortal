@@ -12,7 +12,14 @@ namespace MedicalRecord.Data
     {
         public MedicalRecordContext() 
             : this("DefaultConnection")
-        { }
+        {
+            string connectionStringAliasKey = "SQLSERVER_CONNECTION_STRING_ALIAS";
+            var connectionStringAlias = ConfigurationManager.AppSettings[connectionStringAliasKey];
+            if (connectionStringAlias != null)
+            {
+                this.Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings[connectionStringAlias].ConnectionString;
+            }
+        }
 
         public MedicalRecordContext(string connectionString)
             :base(connectionString)
