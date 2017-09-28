@@ -26,7 +26,7 @@ namespace MedicalRecord.Web.Controllers
         {
             PatientPersister patientPersister = new PatientPersister();
             var patient = patientPersister.Get(id);
-            return View(patient);
+            return View(nameof(Index), patient);
         }
 
         [HttpPost]
@@ -44,12 +44,35 @@ namespace MedicalRecord.Web.Controllers
 
                 ModelState.AddModelError("InvalidData", "Намерени са невалидни полета.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("Error", ex);
             }
 
             return View(patient);
+        }
+
+        [HttpPost]
+        public ActionResult Save(string patientJson)
+        {
+            PatientModel patient = JsonConvert.DeserializeObject<PatientModel>(patientJson);
+            PatientPersister patientPersister = new PatientPersister();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    patientPersister.Save(patient);
+                    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                }
+
+                ModelState.AddModelError("InvalidData", "Намерени са невалидни полета.");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex);
+            }
+
+            return View(nameof(Index), patient);
         }
 
         public ActionResult Tooth()
@@ -71,7 +94,7 @@ namespace MedicalRecord.Web.Controllers
             var disease = diseasePersister.AddDisease(newDisease, patientId);
             return PartialView(disease);
         }
-        
+
         [HttpPost]
         public ActionResult RemoveDisease(int diseaseId, int patientId)
         {

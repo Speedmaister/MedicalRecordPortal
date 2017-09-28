@@ -252,8 +252,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
-    <Content Include="Views\Patient\NewPatient.cshtml" />
-    <Content Include="Views\Patient\EditPatient.cshtml" />
+    <Content Include="Views\Patient\Patient.cshtml" />
     <Content Include="Views\Patient\Tooth.cshtml" />
     <Content Include="Views\Shared\Disease.cshtml" />
   </ItemGroup>

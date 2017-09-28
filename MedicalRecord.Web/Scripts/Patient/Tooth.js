@@ -22,7 +22,7 @@
         var dropdownTemplate;
         $.ajax({
             method: "GET",
-            url: "Tooth",
+            url: "/Patient/Tooth",
             success: function (htmlTemplate) {
                 dropdownTemplate = htmlTemplate;
                 for (var i = 0; i < toothStateCells.length; i++) {

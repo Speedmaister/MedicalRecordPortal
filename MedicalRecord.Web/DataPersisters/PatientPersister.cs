@@ -62,7 +62,7 @@ namespace MedicalRecord.Web.DataPersisters
                 // Amend teeth
                 foreach (var tooth in patient.TeethStatus)
                 {
-                    var toothDb = patientDbEntity.TeethStatus.Find(x => x.Id == tooth.Id);
+                    var toothDb = patientDbEntity.TeethStatus.Find(x => x.Quadrant == tooth.Quadrant && x.OrderNumber == tooth.OrderNumber);
                     toothDb.IsActive = tooth.IsActive;
                     toothDb.StateCode = tooth.StateCode;
                     // Add new procedures

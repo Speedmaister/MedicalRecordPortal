@@ -1,4 +1,5 @@
 ﻿using MedicalRecord.Data;
+using MedicalRecord.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace MedicalRecord.Web.DataPersisters
             }
         }
 
-        public Disease AddDisease(string diseaseName, int patientId)
+        public DiseaseModel AddDisease(string diseaseName, int patientId)
         {
             using (MedicalRecordContext context = new MedicalRecordContext())
             {
@@ -33,7 +34,7 @@ namespace MedicalRecord.Web.DataPersisters
                 var disease = new Disease() { Name = diseaseName, PatientId = patientId };
                 context.Diseases.Add(disease);
                 context.SaveChanges();
-                return disease;
+                return new DiseaseModel(disease);
             }
         }
     }

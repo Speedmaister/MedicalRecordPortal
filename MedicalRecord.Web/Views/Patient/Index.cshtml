@@ -11,15 +11,20 @@
     }
 }
 
-<div>
+<div>    
+    @Html.Partial("Patient", Model)
     @if (isNew)
     {
-        Html.RenderPartial("NewPatient", Model);
+        <div>
+            <button id="create-patient">Create Patient</button>
+        </div>
     }
     else
     {
         @Html.HiddenFor(m => m.Id, new { id = "patient-id" });
-        Html.Partial("EditPatient", Model);
+        <div>
+            <button id="save-patient">Save Patient</button>
+        </div>
     }
 </div>
 
