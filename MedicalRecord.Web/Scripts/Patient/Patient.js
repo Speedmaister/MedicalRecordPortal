@@ -38,7 +38,7 @@
                 newDisease: newDisease,
             };
             if (patientId.length != 0) {
-                data.patientId = patientId[0].value;
+                data.patientId = patientId.val();
                 actionType = "POST";
             }
 
@@ -76,7 +76,7 @@
 
         $('#save-patient').click(function () {
             var patient = getPatienData();
-            patient.Id = patientId[0].value;
+            patient.Id = patientId.val();
             $.ajax({
                 method: "POST",
                 url: "/Patient/Save",
@@ -108,7 +108,7 @@
                 Name: element.children('span')[0].innerText
             }
 
-            if (patientId[0].value != undefined) {
+            if (patientId.length != 0) {
                 disease.Id = element.attr('data-id');
             }
 
