@@ -10,19 +10,28 @@ namespace MedicalRecord.Data
 {
     public class MedicalRecordContext : DbContext
     {
-        public MedicalRecordContext() 
-            : this("DefaultConnection")
+        private static string ConnectionString
         {
-            string connectionStringAliasKey = "SQLSERVER_CONNECTION_STRING_ALIAS";
-            var connectionStringAlias = ConfigurationManager.AppSettings[connectionStringAliasKey];
-            if (connectionStringAlias != null)
+            get
             {
-                this.Database.Connection.ConnectionString = ConfigurationManager.ConnectionStrings[connectionStringAlias].ConnectionString;
+                string connectionStringAliasKey = "SQLSERVER_CONNECTION_STRING_ALIAS";
+                var connectionStringAlias = ConfigurationManager.AppSettings[connectionStringAliasKey];
+                if (connectionStringAlias == null)
+                {
+                    connectionStringAlias = "DefaultConnection";
+                }
+
+                return connectionStringAlias;
             }
         }
 
+        public MedicalRecordContext()
+            : this(ConnectionString)
+        {
+        }
+
         public MedicalRecordContext(string connectionString)
-            :base(connectionString)
+            : base(connectionString)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MedicalRecordContext, Migrations.Configuration>("DefaultConnection"));
         }
