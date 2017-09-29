@@ -146,7 +146,7 @@ namespace MedicalRecord.Web.Models
                     quadrantOfTeeth[j] = new ToothModel(tooth);
                     for (int k = 0; k < tooth.Procedures.Count; k++)
                     {
-                        Procedures.Add(new MedicalProcedureModel(tooth.Procedures[j]));
+                        Procedures.Add(new MedicalProcedureModel(tooth.Procedures[k]));
                     }
                 }
             }
