@@ -11,7 +11,6 @@ namespace MedicalRecord.Web.DataPersisters
         public PatientModel Get(int id)
         {
             PatientModel patientModel = null;
-            throw new Exception("Test exception");
             using (MedicalRecordContext context = new MedicalRecordContext())
             {
                 var patient = context.Patients.Include(x => x.TeethStatus).Include(x => x.Diseases).FirstOrDefault(x => x.Id == id);
