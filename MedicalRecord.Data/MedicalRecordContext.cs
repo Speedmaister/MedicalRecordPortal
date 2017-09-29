@@ -41,6 +41,7 @@ namespace MedicalRecord.Data
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<MedicalProcedure> MedicalProcedures { get; set; }
         public DbSet<ToothState> ToothStates { get; set; }
+        public DbSet<Log> Log { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
