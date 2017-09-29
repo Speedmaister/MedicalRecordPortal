@@ -21,7 +21,7 @@ namespace MedicalRecord.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base(MedicalRecord.Data.MedicalRecordContext.ConnectionString, throwIfV1Schema: false)
+            : base(MedicalRecord.Data.MedicalRecordContext.ConnectionStringName, throwIfV1Schema: false)
         {
         }
 

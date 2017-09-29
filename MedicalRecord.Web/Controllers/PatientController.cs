@@ -1,4 +1,5 @@
-﻿using MedicalRecord.Web.DataPersisters;
+﻿using log4net;
+using MedicalRecord.Web.DataPersisters;
 using MedicalRecord.Web.Models;
 using Newtonsoft.Json;
 using System;
@@ -13,6 +14,8 @@ namespace MedicalRecord.Web.Controllers
     [Authorize]
     public class PatientController : Controller
     {
+        private readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // GET: Patient
         [HttpGet]
         public ActionResult Index()
@@ -46,6 +49,7 @@ namespace MedicalRecord.Web.Controllers
             }
             catch (Exception ex)
             {
+                log.Error("Create patient", ex);
                 ModelState.AddModelError("Error", ex);
             }
 
@@ -69,6 +73,7 @@ namespace MedicalRecord.Web.Controllers
             }
             catch (Exception ex)
             {
+                log.Error("Create patient", ex);
                 ModelState.AddModelError("Error", ex);
             }
 

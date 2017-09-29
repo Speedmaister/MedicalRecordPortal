@@ -10,7 +10,7 @@ namespace MedicalRecord.Data
 {
     public class MedicalRecordContext : DbContext
     {
-        public static string ConnectionString
+        public static string ConnectionStringName
         {
             get
             {
@@ -26,14 +26,14 @@ namespace MedicalRecord.Data
         }
 
         public MedicalRecordContext()
-            : this(ConnectionString)
+            : this(ConnectionStringName)
         {
         }
 
         public MedicalRecordContext(string connectionString)
             : base(connectionString)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MedicalRecordContext, Migrations.Configuration>(ConnectionString));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MedicalRecordContext, Migrations.Configuration>(ConnectionStringName));
         }
 
         public DbSet<Patient> Patients { get; set; }
