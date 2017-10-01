@@ -2,7 +2,7 @@
 using MedicalRecord.Web.Models;
 using System.Data.Entity;
 using System.Linq;
-using System;
+using System.Collections.Generic;
 
 namespace MedicalRecord.Web.DataPersisters
 {
@@ -87,6 +87,22 @@ namespace MedicalRecord.Web.DataPersisters
                 var createdPatient = context.Patients.Add(patient);
                 context.SaveChanges();
                 return createdPatient.Id;
+            }
+        }
+
+        public IEnumerable<AutoCompleteOption> GetPatientEGNs()
+        {
+            using (MedicalRecordContext db = new MedicalRecordContext())
+            {
+                var patientsData = db.Patients.Select(x => new
+                {
+                    x.Id,
+                    x.EGN
+                }).ToList();
+
+                var autoCompleteOptions = patientsData.Select(x => new AutoCompleteOption() { Value = x.Id, Text = x.EGN }).ToList();
+
+                return autoCompleteOptions;
             }
         }
     }

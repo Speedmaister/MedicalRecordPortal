@@ -107,5 +107,12 @@ namespace MedicalRecord.Web.Controllers
             diseasePersister.RemoveDisease(diseaseId, patientId);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+
+        public ActionResult SearchOptions()
+        {
+            PatientPersister patientPersister = new PatientPersister();
+            var searchOptions = patientPersister.GetPatientEGNs();
+            return Json(searchOptions);
+        }
     }
 }
