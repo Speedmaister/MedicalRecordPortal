@@ -5,7 +5,7 @@ namespace MedicalRecord.Data
     public class ToothState
     {
         [Key]
-        [MaxLength(2)]
+        [MaxLength(3)]
         public string Code { get; set; }
 
         [Required]
