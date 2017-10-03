@@ -114,5 +114,12 @@ namespace MedicalRecord.Web.Controllers
             var searchOptions = patientPersister.GetPatientEGNs();
             return Json(searchOptions);
         }
+
+        public ActionResult RemoveProcedure(int procedureId)
+        {
+            ToothPersister toothPersister = new ToothPersister();
+            toothPersister.RemoveProcedure(procedureId);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

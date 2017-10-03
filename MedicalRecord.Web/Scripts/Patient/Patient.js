@@ -21,14 +21,14 @@
                 ToothNumber: newProcedure.toothNumberInput.val(),
                 Price: newProcedure.priceInput.val()
             }
-            
-                var newProcedureRow = document.createElement("tr");
-                newProcedureRow.appendChild(createCell(newProcedureJson.Date));
-                newProcedureRow.appendChild(createCell(newProcedureJson.Diagnose));
-                newProcedureRow.appendChild(createCell(newProcedureJson.ToothNumber));
-                newProcedureRow.appendChild(createCell(newProcedureJson.Name));
-                newProcedureRow.appendChild(createCell(newProcedureJson.Price));
-                medicalProceduresContainer.append(newProcedureRow);
+
+            var newProcedureRow = document.createElement("tr");
+            newProcedureRow.appendChild(createCell(newProcedureJson.Date));
+            newProcedureRow.appendChild(createCell(newProcedureJson.Diagnose));
+            newProcedureRow.appendChild(createCell(newProcedureJson.ToothNumber));
+            newProcedureRow.appendChild(createCell(newProcedureJson.Name));
+            newProcedureRow.appendChild(createCell(newProcedureJson.Price));
+            medicalProceduresContainer.append(newProcedureRow);
         })
 
         $('#new-disease button').click(function () {
@@ -87,6 +87,23 @@
                     var x = 5;
                 }
             });
+        });
+
+        $('.delete-procedure').click(function (e) {
+            var buttonCell = $(e.currentTarget.parentNode);
+            var idContainer = buttonCell.children('input[type=hidden]');
+            if (idContainer.length != 0) {
+                $.ajax({
+                    url: '/Patient/RemoveProcedure',
+                    method: 'POST',
+                    data: {
+                        procedureId: idContainer[0].value
+                    },
+                    success: function () {
+                        $(buttonCell.parent()).remove();
+                    }
+                })
+            }
         });
     })
 
@@ -245,13 +262,18 @@
         var proceduresRows = medicalProceduresContainer.children('tr');
         for (var i = 1; i < proceduresRows.length; i++) {
             var procedureFields = $(proceduresRows[i]).children('td');
+            var idContainer = $(procedureFields[5]).children('input[type=hidden]');
+            var id = 0;
+            if (idContainer.length != 0) {
+                id = idContainer[0].value;
+            }
             var procedure = {
                 Date: procedureFields[0].innerText,
                 Diagnose: procedureFields[1].innerText,
                 ToothNumber: procedureFields[2].innerText,
                 Name: procedureFields[3].innerText,
                 Price: procedureFields[4].innerText,
-                Id: $(procedureFields[5]).children('input[type=hidden]').value
+                Id: id
             };
 
             patient.Procedures.push(procedure);
@@ -267,7 +289,7 @@
     }
 
     function removeDisease(imageElement) {
-        var diseaseId = this.parentNode.getAttribute("data-id");
+        var diseaseId = imageElement.parentNode.getAttribute("data-id");
         if (patientId.length == 0) {
             $(imageElement.currentTarget.parentNode).remove();
         }
@@ -276,11 +298,11 @@
                 method: "POST",
                 url: "/Patient/RemoveDisease",
                 data: {
-                    diseaseId: disease,
+                    diseaseId: diseaseId,
                     patientId: patientId.val()
                 },
                 success: function () {
-                    $(imageElement.currentTarget.parentNode).remove();
+                    $(imageElement.parentNode).remove();
                 }
             })
         }

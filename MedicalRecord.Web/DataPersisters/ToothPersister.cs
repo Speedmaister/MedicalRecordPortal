@@ -17,5 +17,18 @@ namespace MedicalRecord.Web.DataPersisters
                 return stateEntities.Select(x => new ToothStateModel(x)).ToList();
             }
         }
+
+        public void RemoveProcedure(int procedureId)
+        {
+            using (MedicalRecordContext context = new MedicalRecordContext())
+            {
+                var procedure = context.MedicalProcedures.Find(procedureId);
+                if(procedure != null)
+                {
+                    context.MedicalProcedures.Remove(procedure);
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }
