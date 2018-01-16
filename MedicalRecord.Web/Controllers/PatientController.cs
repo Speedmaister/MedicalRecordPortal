@@ -80,6 +80,14 @@ namespace MedicalRecord.Web.Controllers
             return View(nameof(Index), patient);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            PatientPersister patientPersister = new PatientPersister();
+            patientPersister.DeletePatient(id);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
         public ActionResult Tooth()
         {
             return PartialView();

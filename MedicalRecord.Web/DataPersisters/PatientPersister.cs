@@ -13,7 +13,10 @@ namespace MedicalRecord.Web.DataPersisters
             PatientModel patientModel = null;
             using (MedicalRecordContext context = new MedicalRecordContext())
             {
-                var patient = context.Patients.Include(x => x.TeethStatus).Include(x => x.Diseases).FirstOrDefault(x => x.Id == id);
+                var patient = context.Patients
+                                            .Include(x => x.TeethStatus)
+                                            .Include(x => x.Diseases)
+                                            .FirstOrDefault(x => !x.IsDeleted && x.Id == id);
                 if (patient != null)
                 {
                     patientModel = new PatientModel(patient);
@@ -31,7 +34,7 @@ namespace MedicalRecord.Web.DataPersisters
                 var patientDbEntity = context.Patients
                                                 .Include(x => x.Diseases)
                                                 .Include(x => x.TeethStatus)
-                                                .FirstOrDefault(x => x.Id == patient.Id);
+                                                .FirstOrDefault(x => !x.IsDeleted && x.Id == patient.Id);
                 patientDbEntity.FirstName = patient.FirstName;
                 patientDbEntity.LastName = patient.LastName;
                 patientDbEntity.SurName = patient.SurName;
@@ -90,17 +93,42 @@ namespace MedicalRecord.Web.DataPersisters
             }
         }
 
+        public void DeletePatient(int patientId)
+        {
+            using (MedicalRecordContext context = new MedicalRecordContext())
+            {
+                var patient = context.Patients.FirstOrDefault(x => x.Id == patientId);
+                if (patient != null)
+                {
+                    patient.IsDeleted = true;
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public IEnumerable<AutoCompleteOption> GetPatientEGNs()
         {
             using (MedicalRecordContext db = new MedicalRecordContext())
             {
-                var patientsData = db.Patients.Select(x => new
-                {
-                    x.Id,
-                    x.EGN
-                }).ToList();
+                var patientsData = db.Patients
+                                            .Where(x => !x.IsDeleted)
+                                            .Select(x => new
+                                            {
+                                                x.Id,
+                                                x.FirstName,
+                                                x.SurName,
+                                                x.LastName,
+                                                x.EGN
+                                            }).ToList();
 
-                var autoCompleteOptions = patientsData.Select(x => new AutoCompleteOption() { Value = x.Id, Text = x.EGN }).ToList();
+                var autoCompleteOptions = patientsData.Select(x => new AutoCompleteOption()
+                {
+                    Value = x.Id,
+                    EGN = x.EGN,
+                    FirstName = x.FirstName,
+                    SurName = x.SurName,
+                    LastName = x.LastName
+                }).ToList();
 
                 return autoCompleteOptions;
             }

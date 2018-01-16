@@ -1,15 +1,19 @@
 ﻿$(function () {
     var comboBox = $("#patient-search-dropdown");
-    var results = null;
+    var results = [];
     $.ajax({
         method: "POST",
         url: "/Patient/SearchOptions",
         data: null,
         success: function (data) {
-            results = data;
             var displayValues = [];
-            for (var i = 0; i < results.length; i++) {
-                displayValues.push(results[i].Text);
+            for (var i = 0; i < data.length; i++) {
+                var displayValue = data[i].FirstName + ' ' + data[i].SurName + ' ' + data[i].LastName + ' ' + data[i].EGN;
+                displayValues.push(displayValue);
+                results.push({
+                    text: displayValue,
+                    value: data[i]
+                });
             }
 
             $("#patient-search-dropdown").autocomplete({
@@ -19,11 +23,11 @@
     });
 
     $('#open-patient').click(function () {
-        var egn = comboBox.val();
+        var selectedValue = comboBox.val();
         var id = 0;
         for (var i = 0; i < results.length; i++) {
-            if (results[i].Text == egn) {
-                id = results[i].Value;
+            if (results[i].text == selectedValue) {
+                id = results[i].value.Value;
             }
         }
 

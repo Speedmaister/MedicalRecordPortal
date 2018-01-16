@@ -39,6 +39,8 @@ namespace MedicalRecord.Data
         
         [MaxLength(500)]
         public string Address { get; set; }
+        
+        public bool IsDeleted { get; set; }
 
         public virtual List<Disease> Diseases { get; set; }
 

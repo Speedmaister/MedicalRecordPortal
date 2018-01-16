@@ -178,6 +178,7 @@
     <Compile Include="DataPersisters\DiseasePersister.cs" />
     <Compile Include="DataPersisters\PatientPersister.cs" />
     <Compile Include="DataPersisters\ToothPersister.cs" />
+    <Compile Include="Filters\CustomAuthorize.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

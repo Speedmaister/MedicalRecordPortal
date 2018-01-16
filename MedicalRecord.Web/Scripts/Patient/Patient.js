@@ -68,7 +68,7 @@
                     patientJson: JSON.stringify(patient)
                 },
                 success: function (data) {
-                    var x = 5;
+                    alert('Patient created.');
                 }
             });
         });
@@ -84,9 +84,28 @@
                     patientJson: JSON.stringify(patient)
                 },
                 success: function (data) {
-                    var x = 5;
+                    alert('Patient saved.');
                 }
             });
+        });
+
+        $('#delete-patient').click(function () {
+            var patient = getPatienData();
+            patient.Id = patientId.val();
+
+            var isConfirmed = confirm("Are you sure you want to delete " + patient.FirstName + " " + patient.LastName + "?");
+            if (isConfirmed) {
+                $.ajax({
+                    method: "POST",
+                    url: "/Patient/Delete",
+                    data: {
+                        id: patient.Id
+                    },
+                    success: function (data) {
+                        alert('Patient deleted.');
+                    }
+                });
+            }
         });
 
         $('.delete-procedure').click(function (e) {

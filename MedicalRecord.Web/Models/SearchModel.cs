@@ -13,7 +13,10 @@ namespace MedicalRecord.Web.Models
     public class AutoCompleteOption
     {
         public int Value { get; set; }
-        public string Text { get; set; }
+        public string EGN { get; set; }
+        public string FirstName { get; set; }
+        public string SurName { get; set; }
+        public string LastName { get; set; }
     }
 
 

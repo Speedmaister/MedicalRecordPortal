@@ -11,21 +11,21 @@
     }
 }
 
-<div>    
+<div>
     @Html.Partial("Patient", Model)
-    @if (isNew)
-    {
-        <div>
+    <div class="button-holder">
+        @if (isNew)
+        {
             <button id="create-patient">Create Patient</button>
-        </div>
-    }
-    else
-    {
-        @Html.HiddenFor(m => m.Id, new { id = "patient-id" });
-        <div>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.Id, new { id = "patient-id" });
             <button id="save-patient">Save Patient</button>
-        </div>
-    }
+        }
+
+        <button id="delete-patient">DELETE</button>
+    </div>
 </div>
 
 @section Scripts {
